@@ -17,8 +17,7 @@ colorama.init() #Color init for Windows
 # =======================
 #    USER CONFIG
 # =======================
-programtitle="SimplePythonMenu"
-
+programtitle="SimplePythonMenu     "
 
 # =======================
 #    DEFINES
@@ -33,7 +32,10 @@ colors={
 	"close":	"\033[0m"	#Color coding close
 	}
 cc = "\033[0m"
-
+ct = "\033[101m"
+cs = "\033[41m"
+c1 = colors["menu1c"]
+c2 = colors["menu2c"]
 # =======================
 #    MENUS DEFINITIONS
 # =======================
@@ -42,35 +44,35 @@ cc = "\033[0m"
 
 def printMenu(menu):
 	if(menu=="second"):
-		print ("\033[45m       "+programtitle+"         	"+cc)
-		print (colors["menu2c"]+" Second menu title			"+cc)
-		print (colors["menu2c"]+" [1] Option 1				"+cc)
-		print (colors["menu2c"]+" [2] Option 2				"+cc)
-		print (colors["menu2c"]+" [3] Option 3				"+cc)
-		print (colors["menu2c"]+" [4] Option 4				"+cc)
-		print (colors["menu2c"]+" [q] Option 1b				"+cc)
-		print (colors["menu2c"]+" [w] Option 2b				"+cc)
-		print (colors["menu2c"]+" [e] Option 3b				"+cc)
-		print (colors["menu2c"]+" [r] Option 4b				"+cc)
-		print (colors["menu2c"]+" [t] Option 5b				"+cc)
-		print (colors["menu2c"]+" [y] Option 6b				"+cc)
-		print (colors["menu2c"]+" [9] Back (or press ENTER)		"+cc)
-		print (colors["menu2c"]+" [0] Quit (or use CNTRL+C)		"+cc)
+		print (ct+"       "+programtitle+"             "+cc)
+		print (cs+" Second menu title                       "+cc)
+		print (c2+" [1] Option 1                            "+cc)
+		print (c2+" [2] Option 2                            "+cc)
+		print (c2+" [3] Option 3                            "+cc)
+		print (c2+" [4] Option 4                            "+cc)
+		print (c2+" [5] Option 1b                           "+cc)
+		print (c2+" [a] Option 2b                           "+cc)
+		print (c2+" [s] Option 3b                           "+cc)
+		print (c2+" [d] Option 4b                           "+cc)
+		print (c2+" [e] Option 5b                           "+cc)
+		print (c2+" [f] Option 6b                           "+cc)
+		print (c2+" [9] Main menu                           "+cc)
+		print (c2+" [0] Quit (or use CNTRL+C)               "+cc)
 	else:#Main menu by default
-		print ("\033[45m       "+programtitle+"        		"+cc)
-		print (colors["menu1c"]+" Second menu title			"+cc)
-		print (colors["menu1c"]+" [1] Option 1				"+cc)
-		print (colors["menu1c"]+" [2] Option 2				"+cc)
-		print (colors["menu1c"]+" [3] Option 3				"+cc)
-		print (colors["menu1c"]+" [4] Option 4				"+cc)
-		print (colors["menu1c"]+" [q] Option 1b				"+cc)
-		print (colors["menu1c"]+" [w] Option 2b				"+cc)
-		print (colors["menu1c"]+" [e] Option 3b				"+cc)
-		print (colors["menu1c"]+" [r] Option 4b				"+cc)
-		print (colors["menu1c"]+" [t] Option 5b				"+cc)
-		print (colors["menu1c"]+" [y] Option 6b				"+cc)
-		print (colors["menu1c"]+" [9] Back (or press ENTER)		"+cc)
-		print (colors["menu1c"]+" [0] Quit (or use CNTRL+C)		"+cc)
+		print (ct+"       "+programtitle+"             "+cc)
+		print (cs+" Main menu title                         "+cc)
+		print (c1+" [1] Option 1                            "+cc)
+		print (c1+" [2] Option 2                            "+cc)
+		print (c1+" [3] Option 3                            "+cc)
+		print (c1+" [4] Option 4                            "+cc)
+		print (c1+" [5] Option 1b                           "+cc)
+		print (c1+" [a] Option 2b                           "+cc)
+		print (c1+" [s] Option 3b                           "+cc)
+		print (c1+" [d] Option 4b                           "+cc)
+		print (c1+" [e] Option 5b                           "+cc)
+		print (c1+" [f] Option 6b                           "+cc)
+		print (c1+" [9] Second menu                         "+cc)
+		print (c1+" [0] Quit (or use CNTRL+C)               "+cc)
 		
 # =======================
 #      HELPERS
@@ -84,10 +86,6 @@ def printSuccess():
 	printWithColor("ok","Success!!")
 	return 0
 
-# Back to main menu
-def back():
-	pass
-
 # Exit program
 def exit():
 	sys.exit()
@@ -95,7 +93,7 @@ def exit():
 #Handles the CNTRL+C to leave properly the script
 def sigint_handler(signum, frame):
 	print("CNTRL+C exit")
-	sys.exit(1)
+	sys.exit(0)
 
 # =======================
 #      BACKEND
@@ -109,91 +107,101 @@ def sigint_handler(signum, frame):
 
 #First menu actions. Fill the actions for each selection.
 class menu1():
-    def action(self,ch):
-        if   ch == '1':
-            pass
-        elif ch == '2':
-            pass
-        elif ch == '3':
-            pass
-        elif ch == '4':
-            pass
-        elif ch == 'q':
-            pass
-        elif ch == 'w':
-            pass
-        elif ch == 'e':
-            pass
-        elif ch == 'r':
-            pass
-        elif ch == 't':
-            pass
-        elif ch == 'y':
-            pass
-        elif (ch == '9') or (ch==''):
-            back()
-        elif ch == '0':
-            sys.exit()
-        else:
-            printError()
+	def action(self,ch):
+		if   ch == '1':
+			pass
+		elif ch == '2':
+			pass
+		elif ch == '3':
+			pass
+		elif ch == '4':
+			pass
+		elif ch == '5':
+			pass
+		elif ch == 'a':
+			pass
+		elif ch == 's':
+			pass
+		elif ch == 'd':
+			pass
+		elif ch == 'e':
+			pass
+		elif ch == 'f':
+			pass
+		elif (ch==''):
+			pass # Print menu again
+		elif ch == '0':
+			sys.exit()
+		else:
+			printError()
 
 #Second menu actions. Fill the actions for each selection.
 class menu2(menu1):
-    def action(self,ch):
-        if   ch == '1':
-            pass
-        elif ch == '2':
-            pass
-        elif ch == '3':
-            pass
-        elif ch == '4':
-            pass
-        elif ch == 'q':
-            pass
-        elif ch == 'w':
-            pass
-        elif ch == 'e':
-            pass
-        elif ch == 'r':
-            pass
-        elif ch == 't':
-            pass
-        elif ch == 'y':
-            pass
-        elif (ch == '9') or (ch==''):
-            back()
-        elif ch == '0':
-            sys.exit()
-        else:
-            printError()
+	def action(self,ch):
+		if   ch == '1':
+			pass
+		elif ch == '2':
+			pass
+		elif ch == '3':
+			pass
+		elif ch == '4':
+			pass
+		elif ch == '5':
+			pass
+		elif ch == 'a':
+			pass
+		elif ch == 's':
+			pass
+		elif ch == 'd':
+			pass
+		elif ch == 'e':
+			pass
+		elif ch == 'f':
+			pass
+		elif (ch==''):
+			pass # Print menu again
+		elif ch == '0':
+			sys.exit()
+		else:
+			printError()
 
 # =======================
 #      MAIN PROGRAM
 # =======================
 
-def actuator(type,ch):
-    if type == 0:
-        menu=menu1()
-        menu.action(ch)
-    else:
-        menu=menu2()
-        menu.action(ch)
+class main_menu:
+	def __init__ (self):
+		self.menu="main"
 	
-def main_menu():
-	printMenu("main")
-	choice = raw_input(" >> ")
-	if(choice=="i"):
-		printMenu("second")
+	def menuExecution(self):
+		printMenu(self.menu)
 		choice = raw_input(" >> ")
-		actuator(1,choice)
-	else:
-		actuator(0,choice)
+		if(self.menu=="main"):
+			if(choice=="9"):
+				self.menu="second"
+			else:
+				self.actuator(0,choice)
+		else:
+			if(choice=='9'):
+				self.menu="main"
+			else:
+				self.actuator(1,choice)
+		print("\n")
 	
+	def actuator(self,type,ch):
+		if type == 0:
+			menu=menu1()
+			menu.action(ch)
+		else:
+			menu=menu2()
+			menu.action(ch)
+
+
 def main_loop():
+	x = main_menu()
 	signal.signal(signal.SIGINT, sigint_handler)
 	while True:
-		main_menu()
-		print("\n")
+		x.menuExecution()
 
 # Main Program
 if __name__ == "__main__":
