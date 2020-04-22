@@ -175,7 +175,7 @@ class main_menu:
 	
 	def menuExecution(self):
 		printMenu(self.menu)
-		choice = raw_input(" >> ")
+		choice = input(" >> ")
 		if(self.menu=="main"):
 			if(choice=="9"):
 				self.menu="second"
