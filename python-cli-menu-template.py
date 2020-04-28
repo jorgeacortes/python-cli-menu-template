@@ -4,205 +4,245 @@
 #description     :Template for a custom scripting menu
 #author          :@cortesjorgea
 #date            :10/2018
-#version         :1.0
+#updated         :04/2020
+#version         :2.0
 #usage           :simple_python_menu.py
-#notes           :Change title in USER CONFIG. Create custom actions at BACKEND. Fill the actions in menu1 and menu2.
-#python_version  :2.7.15  
+#notes           :Update section USER CONFIG dicts and reimplement methods
+#                 of menu1 and menu2 classes at BACKEND section.
+#python_version  :3.8.0
 #=======================================================================
-
-# Import the modules needed
 import sys, os, signal, colorama
-colorama.init() #Color init for Windows
-
-# =======================
-#    USER CONFIG
-# =======================
-programtitle="SimplePythonMenu     "
+colorama.init() # Color init for Windows
 
 # =======================
 #    DEFINES
 # =======================
 
-colors={
-	"info":     "35m",  	#Orange for info messages
-	"error":    "31m",  	#Red for error messages
-	"ok":       "32m",   	#Green for success messages
-	"menu2c":	"\033[46m",	#Light blue menu
-	"menu1c":	"\033[44m",	#Blue menu
-	"close":	"\033[0m"	#Color coding close
-	}
+colors = {
+  "info":     "35m",      #Orange for info messages
+  "error":    "31m",      #Red for error messages
+  "ok":       "32m",      #Green for success messages
+  "menu2c":  "\033[46m",  #Light blue menu
+  "menu1c":  "\033[44m",  #Blue menu
+  "close":  "\033[0m"     #Color coding close
+  }
 cc = "\033[0m"
 ct = "\033[101m"
 cs = "\033[41m"
 c1 = colors["menu1c"]
 c2 = colors["menu2c"]
-# =======================
-#    MENUS DEFINITIONS
-# =======================
 
-#Fill the options as needed.
 
-def printMenu(menu):
-	if(menu=="second"):
-		print (ct+"       "+programtitle+"             "+cc)
-		print (cs+" Second menu title                       "+cc)
-		print (c2+" [1] Option 1                            "+cc)
-		print (c2+" [2] Option 2                            "+cc)
-		print (c2+" [3] Option 3                            "+cc)
-		print (c2+" [4] Option 4                            "+cc)
-		print (c2+" [5] Option 1b                           "+cc)
-		print (c2+" [a] Option 2b                           "+cc)
-		print (c2+" [s] Option 3b                           "+cc)
-		print (c2+" [d] Option 4b                           "+cc)
-		print (c2+" [e] Option 5b                           "+cc)
-		print (c2+" [f] Option 6b                           "+cc)
-		print (c2+" [9] Main menu                           "+cc)
-		print (c2+" [0] Quit (or use CNTRL+C)               "+cc)
-	else:#Main menu by default
-		print (ct+"       "+programtitle+"             "+cc)
-		print (cs+" Main menu title                         "+cc)
-		print (c1+" [1] Option 1                            "+cc)
-		print (c1+" [2] Option 2                            "+cc)
-		print (c1+" [3] Option 3                            "+cc)
-		print (c1+" [4] Option 4                            "+cc)
-		print (c1+" [5] Option 1b                           "+cc)
-		print (c1+" [a] Option 2b                           "+cc)
-		print (c1+" [s] Option 3b                           "+cc)
-		print (c1+" [d] Option 4b                           "+cc)
-		print (c1+" [e] Option 5b                           "+cc)
-		print (c1+" [f] Option 6b                           "+cc)
-		print (c1+" [9] Second menu                         "+cc)
-		print (c1+" [0] Quit (or use CNTRL+C)               "+cc)
-		
+# =======================
+#    USER CONFIG
+# =======================
+programtitle="SimplePythonMenu"
+
+# Fill the options as needed.
+menu2_colors = {
+  "ct":ct,
+  "cs":cs,
+  "opt":c2
+}
+menu2_options = {
+  "title":  "Second menu",
+  "1":      "Option 1",
+  "2":      "Option 2",
+  "3":      "Option 3",
+  "4":      "Option 4",
+  "5":      "Option 5",
+  "a":      "Option a",
+  "s":      "Option s",
+  "d":      "Option d",
+  "e":      "Option e",
+  "f":      "Option f",
+  "9":      "Main menu",
+  "0":      "Quit (or use CNTRL+C)",
+}
+menu1_colors = {
+  "ct":ct,
+  "cs":cs,
+  "opt":c1
+}
+menu1_options = {
+  "title":  "First menu",
+  "1":      "Option 1",
+  "2":      "Option 2",
+  "3":      "Option 3",
+  "4":      "Option 4",
+  "5":      "Option 5",
+  "a":      "Option a",
+  "s":      "Option s",
+  "d":      "Option d",
+  "e":      "Option e",
+  "f":      "Option f",
+  "9":      "Second menu",
+  "0":      "Quit (or use CNTRL+C)",
+}
+
 # =======================
 #      HELPERS
 # =======================
 def printWithColor(color,string):
-	print("\033["+colors[color]+" "+string+cc)
+  print("\033["+colors[color]+" "+string+cc)
 def printError():
-	printWithColor("error","Error!!")
-	return 1
+  printWithColor("error","Error!!")
+  return 1
 def printSuccess():
-	printWithColor("ok","Success!!")
-	return 0
+  printWithColor("ok","Success!!")
+  return 0
 
 # Exit program
 def exit():
-	sys.exit()
-	
+  sys.exit()
+  
 #Handles the CNTRL+C to leave properly the script
 def sigint_handler(signum, frame):
-	print("CNTRL+C exit")
-	sys.exit(0)
-
-# =======================
-#      BACKEND
-# =======================
-
-#Create here custom actions.
+  print("CNTRL+C exit")
+  sys.exit(0)
 
 # =======================
 #      ACTIONS
 # =======================
 
-#First menu actions. Fill the actions for each selection.
-class menu1():
-	def action(self,ch):
-		if   ch == '1':
-			pass
-		elif ch == '2':
-			pass
-		elif ch == '3':
-			pass
-		elif ch == '4':
-			pass
-		elif ch == '5':
-			pass
-		elif ch == 'a':
-			pass
-		elif ch == 's':
-			pass
-		elif ch == 'd':
-			pass
-		elif ch == 'e':
-			pass
-		elif ch == 'f':
-			pass
-		elif (ch==''):
-			pass # Print menu again
-		elif ch == '0':
-			sys.exit()
-		else:
-			printError()
+# Menu template
+class menu_template():
 
-#Second menu actions. Fill the actions for each selection.
-class menu2(menu1):
-	def action(self,ch):
-		if   ch == '1':
-			pass
-		elif ch == '2':
-			pass
-		elif ch == '3':
-			pass
-		elif ch == '4':
-			pass
-		elif ch == '5':
-			pass
-		elif ch == 'a':
-			pass
-		elif ch == 's':
-			pass
-		elif ch == 'd':
-			pass
-		elif ch == 'e':
-			pass
-		elif ch == 'f':
-			pass
-		elif (ch==''):
-			pass # Print menu again
-		elif ch == '0':
-			sys.exit()
-		else:
-			printError()
+  def __init__(self,options,colors):
+    self.menu_width = 50  # Width in characters of the printed menu
+    self.options = options
+    self.colors = colors
+
+# =======================
+#      Menu prints
+# =======================
+  def createMenuLine(self,letter,color,length,text):
+    menu = color+" ["+letter+"] "+text
+    line = " "*(length-len(menu))
+    return  menu+line+cc
+
+  def createMenu(self,size):
+    line = self.colors["ct"] + " "+programtitle
+    line += " "*(size-len(programtitle)-6)
+    line += cc
+    print (line)  # Title
+    line = self.colors["cs"] + " "+self.options["title"]
+    line += " "*(size-len(self.options["title"])-6)
+    line += cc
+    print (line) # Subtitle
+    for key in self.options:
+      if(key != "title"):
+        print (self.createMenuLine(key,self.colors["opt"],size,self.options[key]))
+
+  def printMenu(self):
+    self.createMenu(self.menu_width)
+# =======================
+#      Action calls
+# =======================
+  def action(self,ch):
+    if   ch == '1':
+      self.method_1()
+    elif ch == '2':
+      self.method_2()
+    elif ch == '3':
+      self.method_3()
+    elif ch == '4':
+      self.method_4()
+    elif ch == '5':
+      self.method_5()
+    elif ch == 'a':
+      self.method_a()
+    elif ch == 's':
+      self.method_s()
+    elif ch == 'd':
+      self.method_d()
+    elif ch == 'e':
+      self.method_e()
+    elif ch == 'f':
+      self.method_f()
+    elif (ch==''):
+      pass # Print menu again
+    elif ch == '0':
+      sys.exit()
+    else:
+      printError()
+# =======================
+#      Empty methods
+# =======================
+  def method_1(self):
+    pass
+  def method_2(self):
+    pass
+  def method_3(self):
+    pass
+  def method_4(self):
+    pass
+  def method_5(self):
+    pass
+  def method_a(self):
+    pass
+  def method_s(self):
+    pass
+  def method_d(self):
+    pass
+  def method_e(self):
+    pass
+  def method_f(self):
+    pass
+
+
+# =======================
+#      BACKEND
+# =======================
+
+# Create here custom actions.
+
+# First menu actions. Implement each method.
+class menu1(menu_template):
+  pass
+
+# Second menu actions. Implement each method.
+class menu2(menu_template):
+  pass
 
 # =======================
 #      MAIN PROGRAM
 # =======================
 
-class main_menu:
-	def __init__ (self):
-		self.menu="main"
-	
-	def menuExecution(self):
-		printMenu(self.menu)
-		choice = input(" >> ")
-		if(self.menu=="main"):
-			if(choice=="9"):
-				self.menu="second"
-			else:
-				self.actuator(0,choice)
-		else:
-			if(choice=='9'):
-				self.menu="main"
-			else:
-				self.actuator(1,choice)
-		print("\n")
-	
-	def actuator(self,type,ch):
-		if type == 0:
-			menu=menu1()
-			menu.action(ch)
-		else:
-			menu=menu2()
-			menu.action(ch)
+class menu_handler:
 
+  def __init__ (self):
+    self.current_menu="main"
+    self.m1=menu1(menu1_options, menu1_colors)
+    self.m2=menu2(menu2_options, menu2_colors)
 
-def main_loop():
-	x = main_menu()
-	signal.signal(signal.SIGINT, sigint_handler)
-	while True:
-		x.menuExecution()
+  def menuExecution(self):
+    if(self.current_menu=="main"):
+      self.m1.printMenu()
+    else:
+      self.m2.printMenu()
+    choice = input(" >> ")
+    if(self.current_menu=="main"):
+      if(choice=="9"):
+        self.current_menu="second"
+      else:
+        self.actuator(0,choice)
+    else:
+      if(choice=='9'):
+        self.current_menu="main"
+      else:
+        self.actuator(1,choice)
+    print("\n")
+
+  def actuator(self,type,ch):
+    if type == 0:
+      self.m1.action(ch)
+    else:
+      self.m2.action(ch)
 
 # Main Program
 if __name__ == "__main__":
-	main_loop()
+  x = menu_handler()
+  signal.signal(signal.SIGINT, sigint_handler)
+  while True:
+    x.menuExecution()
